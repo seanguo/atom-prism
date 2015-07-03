@@ -1,0 +1,38 @@
+# See https://atom.io/docs/latest/hacking-atom-package-word-count#menus for more details
+'context-menu':
+  'atom-text-editor': [
+    {
+      'label': 'Prism: Format Logs'
+      'command': 'atom-prism:format'
+    }
+    {
+      'label': 'Prism: Extract SIP message'
+      'command': 'atom-prism:extractSipMessage'
+    }
+    {
+      'label': 'Prism: Extract Tropo script'
+      'command': 'atom-prism:extractScript'
+    }
+  ]
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'atom-prism'
+      'submenu': [
+        {
+          'label': 'Format Log'
+          'command': 'atom-prism:format'
+        }
+        {
+          'label': 'Extract SIP message'
+          'command': 'atom-prism:extractSipMessage'
+        }
+        {
+          'label': 'Prism: Extract Tropo script'
+          'command': 'atom-prism:extractScript'
+        }
+      ]
+    ]
+  }
+]
