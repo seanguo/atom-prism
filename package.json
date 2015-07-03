@@ -10,7 +10,7 @@
     "format",
     "extract"
   ],
-  "repository": "https://github.com/atom/atom-prism",
+  "repository": "https://github.com/seanguo/atom-prism",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
