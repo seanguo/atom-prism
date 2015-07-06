@@ -1,7 +1,7 @@
 {
   "name": "atom-prism",
   "main": "./lib/atom-prism",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Prism logs formatter",
   "keywords": [
     "prism",
