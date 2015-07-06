@@ -1,0 +1,41 @@
+'fileTypes': [
+  'txt',
+  'log'
+]
+'name': 'Prism Logs'
+'patterns': [
+  {
+    'captures':
+      '1':
+        'name': 'entity.name.tag'
+      '2':
+        'name': 'constant.numeric'
+      '3':
+        'name': 'entity.name.type'
+      '4':
+        'name': 'entity.name.type'
+      '5':
+        'name': 'entity.name.function'
+      '6':
+        'name': 'entity.name.section'
+      '7':
+        'name': 'invalid.illegal'
+      '8':
+        'name': 'entity.name.type'
+      '9':
+        'name': 'entity.name.function'
+      '10':
+        'name': 'entity.name.type'
+      '11':
+        'name': 'invalid.deprecated'
+      '12':
+        'name': 'entity.name.function'
+      '13':
+        'name': 'meta.bullet-point.strong.text'
+      '14':
+        'name': 'meta.bullet-point.strong.text'
+    'match': '^(\\S*\\s*\\d{1,2}\\s*\\d{2}:\\d{2}:\\d{2}\\.\\d{3})\\s(\\S*)\\s(\\S*)\\s*(\\S*)\\s*(\\d*)/(\\d*)/([^/]*)/([^/]*)/([^/]*)/([^/]*)[/\s]*(\\[[^\\]]*\\])[/\s]*([^:]*):(.*)$\\n'
+    'name': 'meta.bullet-point.strong.text'
+  }
+]
+'scopeName': 'text.prism'
