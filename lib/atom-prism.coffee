@@ -1,7 +1,8 @@
   formatter = {}
 
   format = (editor)  ->
-    wholeFile = editor.getGrammar().name == 'Plain Text'
+    grammar = editor.getGrammar().name
+    wholeFile = grammar == 'Plain Text' || grammar == 'Prism Logs'
     if wholeFile
       text = editor.getText()
       editor.setText(formatter.pretty(text))
@@ -19,25 +20,37 @@
   extractScript =  (editor)  ->
     text = editor.getText()
     atom.workspace.open().then (newEditor) ->
-      newEditor.setText(formatter.extractScript(text))
+      ret = formatter.extractScript(text);
+      newEditor.setText(ret.text)
+      if ret.type
+        grammar = atom.grammars.grammarForScopeName("source.#{ret.type}")
+        grammar ?= atom.grammars.grammarForScopeName("text.html.#{ret.type}")
+        newEditor.setGrammar(grammar)
 
   formatter.extractScript = (text) ->
+    ret = {}
     scriptStart = /[^#]*#TROPO#:/g
     scriptEnd = /line\s(\d{3,4})/g
+    scriptType = /of\stype\s(.+),/g
+    type = null
     try
       lines = text.split("\n")
       newLines = []
       for line in lines
         do (line) ->
+          if line.match(scriptType)
+            if not ret.type?
+              ret.type = scriptType.exec(line)[1]
           if line.match(scriptEnd)
             newLines.push(line.replace(scriptStart, "").replace(/\\s/g, "/"))
-      newLines.sort (a, b) -> 
+      newLines.sort (a, b) ->
         array1 = new RegExp("line\\s(\\d{3,4})","g").exec(a)
         array2 = new RegExp("line\\s(\\d{3,4})","g").exec(b)
         return array1[1] - array2[1]
-      return newLines.join("\n")
+      ret.text = newLines.join("\n")
     catch error
-      text
+      ret.text = text
+    return ret
 
   formatter.pretty = (text) ->
     try
