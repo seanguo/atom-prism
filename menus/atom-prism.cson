@@ -18,7 +18,7 @@
   {
     'label': 'Packages'
     'submenu': [
-      'label': 'atom-prism'
+      'label': 'Prism Log Formatter'
       'submenu': [
         {
           'label': 'Format Log'
@@ -29,7 +29,7 @@
           'command': 'atom-prism:extractSipMessage'
         }
         {
-          'label': 'Prism: Extract Tropo script'
+          'label': 'Extract Tropo script'
           'command': 'atom-prism:extractScript'
         }
       ]
