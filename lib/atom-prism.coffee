@@ -23,8 +23,13 @@
       ret = formatter.extractScript(text);
       newEditor.setText(ret.text)
       if ret.type
-        grammar = atom.grammars.grammarForScopeName("source.#{ret.type}")
-        grammar ?= atom.grammars.grammarForScopeName("text.html.#{ret.type}")
+        type = ret.type
+        if ret.type == 'jython'
+          type = 'python'
+        else if ret.type == 'groovy' && !atom.grammars.grammarForScopeName("source.groovy")?
+          type = 'java'
+        grammar = atom.grammars.grammarForScopeName("source.#{type}")
+        grammar ?= atom.grammars.grammarForScopeName("text.html.#{type}")
         newEditor.setGrammar(grammar)
 
   formatter.extractScript = (text) ->
