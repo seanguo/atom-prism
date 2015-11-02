@@ -26,6 +26,8 @@
         type = ret.type
         if ret.type == 'jython'
           type = 'python'
+        if ret.type == 'jruby'
+          type = 'ruby'
         else if ret.type == 'groovy' && !atom.grammars.grammarForScopeName("source.groovy")?
           type = 'java'
         grammar = atom.grammars.grammarForScopeName("source.#{type}")
