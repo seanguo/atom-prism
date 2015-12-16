@@ -1,15 +1,14 @@
   formatter = {}
 
   format = (editor)  ->
-    grammar = editor.getGrammar().name
-    wholeFile = grammar == 'Plain Text' || grammar == 'Prism Logs'
-    if wholeFile
-      text = editor.getText()
-      editor.setText(formatter.pretty(text))
-    else
+    selection = editor.getSelectedText()
+    if selection
       text = editor.replaceSelectedText({}, (text) ->
         formatter.pretty(text)
       )
+    else
+      text = editor.getText()
+      editor.setText(formatter.pretty(text))
 
   extractSipMessage = (editor)  ->
     text = editor.getText()
