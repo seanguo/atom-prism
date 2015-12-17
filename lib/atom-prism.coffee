@@ -9,6 +9,7 @@
     else
       text = editor.getText()
       editor.setText(formatter.pretty(text))
+    editor.setGrammar(atom.grammars.grammarForScopeName("text.prism"))
 
   extractSipMessage = (editor)  ->
     text = editor.getText()
