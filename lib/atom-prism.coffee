@@ -37,7 +37,7 @@
   formatter.extractScript = (text) ->
     ret = {}
     scriptStart = /[^#]*#TROPO#:/g
-    scriptEnd = /line\s(\d{3,4})/g
+    scriptEnd = /line\s(\d{1,4})/g
     scriptType = /of\stype\s(.+),/g
     type = null
     try
@@ -51,8 +51,8 @@
           if line.match(scriptEnd)
             newLines.push(line.replace(scriptStart, "").replace(/\\s/g, "/"))
       newLines.sort (a, b) ->
-        array1 = new RegExp("line\\s(\\d{3,4})","g").exec(a)
-        array2 = new RegExp("line\\s(\\d{3,4})","g").exec(b)
+        array1 = new RegExp("line\\s(\\d{1,4})","g").exec(a)
+        array2 = new RegExp("line\\s(\\d{1,4})","g").exec(b)
         return array1[1] - array2[1]
       ret.text = newLines.join("\n")
     catch error
@@ -61,7 +61,7 @@
 
   formatter.pretty = (text) ->
     try
-      return text.replace(/\\r\\n/g, "\r\n")
+      return text.replace(/\\\\r\\\\n/g, "\r\n").replace(/\\r\\n/g, "\r\n").replace(/\\s/g, "/")
     catch error
       text
 
