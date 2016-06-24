@@ -17,6 +17,11 @@
       newEditor.setText(formatter.extractSip(text))
       #atom.notifications.addSuccess("Extracted SIP message to the new file")
 
+  extractMrcpMessage = (editor)  ->
+    text = editor.getText()
+    atom.workspace.open().then (newEditor) ->
+      newEditor.setText(formatter.extractMrcp(text))
+
   extractScript =  (editor)  ->
     text = editor.getText()
     atom.workspace.open().then (newEditor) ->
@@ -65,17 +70,26 @@
     catch error
       text
 
-  formatter.extractSip = (text) ->
+  formatter.extractOnMatch = (text, regex, pretty) ->
     try
       lines = text.split("\n")
       newLines = []
       for line in lines
         do (line) ->
-          if line.match(/((#SIP#: \((o|i)\))|(Received (request|response)))/g)
-            newLines.push(formatter.pretty(line))
+          if line.match(regex)
+            if pretty is true
+              newLines.push(formatter.pretty(line))
+            else
+              newLines.push(line)
       return newLines.join("\n")
     catch error
       text
+
+  formatter.extractSip = (text) ->
+    return formatter.extractOnMatch(text, /((#SIP#: \((o|i)\))|(Received (request|response)))/g, true)
+
+  formatter.extractMrcp = (text) ->
+    return formatter.extractOnMatch(text, /((#MRCP#: \((o|i)\)))/g)
 
   module.exports =
     activate: ->
@@ -86,6 +100,9 @@
         'atom-prism:extractSipMessage': ->
           editor = atom.workspace.getActiveTextEditor()
           extractSipMessage(editor)
+        'atom-prism:extractMrcpMessage': ->
+          editor = atom.workspace.getActiveTextEditor()
+          extractMrcpMessage(editor)
         'atom-prism:extractScript': ->
           editor = atom.workspace.getActiveTextEditor()
           extractScript(editor)

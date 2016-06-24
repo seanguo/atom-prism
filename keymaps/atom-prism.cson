@@ -10,4 +10,5 @@
 'atom-workspace':
   'ctrl-alt-p': 'atom-prism:format'
   'ctrl-alt-m': 'atom-prism:extractSipMessage'
+  'ctrl-alt-r': 'atom-prism:extractMrcpMessage'
   'ctrl-alt-s': 'atom-prism:extractScript'

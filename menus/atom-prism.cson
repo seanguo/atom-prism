@@ -10,6 +10,10 @@
       'command': 'atom-prism:extractSipMessage'
     }
     {
+      'label': 'Prism: Extract MRCP message'
+      'command': 'atom-prism:extractMrcpMessage'
+    }
+    {
       'label': 'Prism: Extract Tropo script'
       'command': 'atom-prism:extractScript'
     }
@@ -27,6 +31,10 @@
         {
           'label': 'Extract SIP message'
           'command': 'atom-prism:extractSipMessage'
+        }
+        {
+          'label': 'Extract MRCP message'
+          'command': 'atom-prism:extractMrcpMessage'
         }
         {
           'label': 'Extract Tropo script'
